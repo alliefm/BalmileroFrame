@@ -1,5 +1,5 @@
 /**
-Balimero Frame
+Balmilero Frame
 Alicia Paterson alicia@aliciapaterson.com
 This program controls the lights and IoT connectivity & behaviour
 for the art frame for the Balmilero family.
