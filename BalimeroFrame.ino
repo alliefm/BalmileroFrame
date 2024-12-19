@@ -12,13 +12,13 @@ Change the bottom few items to adjust the behaviour of the LEDs in the frame
 // They go up to full over four steps. A lapseRate of 60 seconds will mean the heart 
 // drops one level every 60 seconds.
 // The default rate is 24 hours 
-int lapseRate = 400; // in seconds, 86400 is one day
+int lapseRate = 21600; // in seconds, 86400 is one day, 21600 is six hours
 // maxBrightness limits how bright the LEDs can get. Other brightness levels are based on this value
 // 0 is off and 255 is VERY bright. Default is 120
-int maxBrightness = 120;
+int maxBrightness = 180;
 // adafruitIOdelay serves to limit how quickly the heart can increase to full
 // If set to 3600 seconds, then it can only increaseone level every hour 
-int adafruitIOdelay = 10; // in seconds
+int adafruitIOdelay = 30; // in seconds
 // The following items sets the color of the heart
 // Use https://rgbcolorpicker.com/565 to chose your own value (the number between 0 and 65535)
 #define HEART_COLOR 63497
@@ -80,7 +80,7 @@ bool heartFilling = true;
 unsigned long heartMillis = 0;
 
 // Adafruit IO feeds
-AdafruitIO_Feed *actionFlag = io.feed("balmileroframe.actionflag");
+AdafruitIO_Feed *actionFlag = io.feed("balmileroframe.actionflag"); //balmileroframe.actionflag
 AdafruitIO_Feed *lastUpdate = io.feed("balmileroframe.lastupdate");
 AdafruitIO_Feed *buttonAction = io.feed("balmileroframe.buttonaction");
 AdafruitIO_Feed *buttonLastUpdated = io.feed("balmileroframe.buttonlastupdated");
@@ -178,9 +178,6 @@ void loop() {
   if (getEpochTime() > lastUpdated + lapseRate) {
     if (currentMode > 1) {
       currentMode--;
-      Serial.print(lastUpdated);
-      Serial.print(" < ");
-      Serial.println(getEpochTime());
     }
     lastUpdated = getEpochTime();
     Serial.print("Mode: ");
